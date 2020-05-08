@@ -1,9 +1,9 @@
 <?php
 
-$mainDir = 'design';
+$mainDir = 'sitename';
 chdir('../');
 
-require_once '../vendor/autoload.php';
+require_once '/vendor/autoload.php';
 $loader = new \Twig\Loader\FilesystemLoader('docs/');
 $twig = new \Twig\Environment($loader, array('debug' => true));
 

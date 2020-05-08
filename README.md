@@ -13,8 +13,11 @@ Function in pipeline:
 List all files used by current file.
 
 ## Dependencies:
-Needs Twig template engine to function.
+Needs Twig template engine to function.  
 Neds to execute grep from PHP.
+
+## Lannguage:
+Gives som feedback in Norwegian.
 
 ## Licence:
 This project is distributed under (License will come, preferably open sorce ... ned to learn)
