@@ -50,7 +50,11 @@ function getFileinfo($srcFile){
     preg_match( $regexDesk, $content, $result);
     $descr = $result[1];
   }
-  exec("grep -r -l " . escapeshellarg($filename) . " ".getcwd() . DIRECTORY_SEPARATOR . $grepDir."/*", $fileList);
+  if ($grepDir){
+    exec("grep -r -l " . escapeshellarg($filename) . " ".getcwd() . DIRECTORY_SEPARATOR . $grepDir."/*", $fileList);
+  }else{
+    exec("grep -r -l " . escapeshellarg($filename) . " ".getcwd() . "/*", $fileList);
+  }
   $fileList = str_replace(getcwd(), '', $fileList);
   $fileInfo = array($descr, $fileList);
   return $fileInfo;
