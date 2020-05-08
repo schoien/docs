@@ -16,7 +16,7 @@ List all files used by current file.
 Needs Twig template engine to function.  
 Neds to execute grep from PHP.
 
-## Lannguage:
+## Language:
 Gives som feedback in Norwegian.
 
 ## Licence:
