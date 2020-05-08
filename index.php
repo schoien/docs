@@ -1,13 +1,12 @@
 <?php
 
-$mainDir = 'sitename';
+$mainDir = 'sitefolder';
+$grepDir = 'sitefolder';
 chdir('../');
 
-require_once '/vendor/autoload.php';
+require_once 'vendor/autoload.php';
 $loader = new \Twig\Loader\FilesystemLoader('docs/');
 $twig = new \Twig\Environment($loader, array('debug' => true));
-
-
 
 if (isset($_GET['getinfo'])) {
   $srcFile = $_GET['getinfo'];
@@ -32,6 +31,7 @@ if (isset($_GET['getinfo'])) {
 
 function getFileinfo($srcFile){
   global $mainDir;
+  global $grepDir;
   $fileType = end(explode('.', $srcFile));
   $filename = end(explode('/', $srcFile));
   $cf = false;  
@@ -50,7 +50,7 @@ function getFileinfo($srcFile){
     preg_match( $regexDesk, $content, $result);
     $descr = $result[1];
   }
-  exec("grep -r -l " . escapeshellarg($filename) . " ".getcwd()."/*", $fileList);
+  exec("grep -r -l " . escapeshellarg($filename) . " ".getcwd() . DIRECTORY_SEPARATOR . $grepDir."/*", $fileList);
   $fileList = str_replace(getcwd(), '', $fileList);
   $fileInfo = array($descr, $fileList);
   return $fileInfo;

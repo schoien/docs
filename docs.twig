@@ -22,6 +22,7 @@
 
   function toggleFolderContent( e ){
     $(e.currentTarget).siblings().slideToggle(150);   
+    $(e.currentTarget).parent().toggleClass('open');   
   }
   function toggleFileDetails( e ){
     var path = $(e.currentTarget).data('path');
