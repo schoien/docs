@@ -2,9 +2,9 @@
 A simple php script that reads file structure an gives file info for easy documentation. 
 
 ## Use:
-Will look for Deskription comments in:
-php, less, css, js files: /*DESK *Deskription here* */
-twig, comp files: {#DESK *Deskription here* #}
+Will look for Deskription comments in:  
+php, less, css, js files: /*DESK *Deskription here* */  
+twig, comp files: {#DESK *Deskription here* #}  
 open for sugestions on filetypes
 
 Will list all files where current file is used.
