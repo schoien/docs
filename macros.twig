@@ -1,0 +1,38 @@
+{% macro readArray(array) %}
+  {% import _self as macros %}
+  <ul>
+  {% for key, ff in array %}
+    {% if ff is iterable %}
+      <li class='folder'><h4 class="folderBtn">{{ key }}</h4>
+      {{ macros.readArray(ff) }}
+      </li>    
+    {% else %}
+     <li class="file" data-path="{{ ff }}"><h5>{{ key }}</h5>
+     </li>
+    {% endif %}
+  {% endfor %}
+  </ul>
+{% endmacro %}
+{% block fildetaljer %}
+  <div class="fileInfo">
+    <h6>{% if deskr %}{{ deskr }}{% else %}Ingen beskrivele i fil{% endif %}</h6>
+    <h5>Fila refereres i:</h5>
+    <ul class="filelist">
+    {% if usedin %}
+      {% for file in usedin %}
+        <li>{{ file }}</li>
+      {% endfor %}
+    {% else %}
+      <h6>Ingen filer funnet</h6>
+    {% endif %}
+    </ul>
+    <h5>Fila inkluderer:</h5>
+    <ul class="filelist">
+    <h6>Ikke laget sjekk enda</h6>
+    {% for file in needs %}
+      <li>{{ file }}</li>
+    {% endfor %}
+    </ul>
+  </div>
+
+{% endblock %}

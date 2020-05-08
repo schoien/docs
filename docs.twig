@@ -1,0 +1,48 @@
+{% import 'macros.twig' as macros %}
+<!DOCTYPE html>
+<html lang="no">
+	<head>
+    <title>Docs for {{ mainDir }}</title>
+   <link href="style.css" rel="stylesheet" type="text/css" media="all">
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <header>
+      <h2>{{ mainDir }}/</h2>
+      <h4>{{ workDir }}/</h4>
+    </header>
+    {{ macros.readArray(filelist) }}
+  </body>
+</html>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('.folderBtn').click(toggleFolderContent);
+    $('.file').click(toggleFileDetails);
+  });
+
+  function toggleFolderContent( e ){
+    $(e.currentTarget).siblings().slideToggle(150);   
+  }
+  function toggleFileDetails( e ){
+    var path = $(e.currentTarget).data('path');
+    if ( $(e.currentTarget).hasClass('active') ){
+      $(e.currentTarget).children('.fileInfo').remove();
+      $(e.currentTarget).removeClass('active');
+    }else{
+      $.ajax(
+        '?getinfo='+path,
+        {
+            success: function(data) {
+              $(e.currentTarget).addClass('active');
+              $(e.currentTarget).append(data);
+              //$(e.currentTarget).children('.fileInfo').html(data);
+              $(e.currentTarget).children('.fileInfo').slideToggle(150);
+            },
+            error: function() {
+              alert('There was some error performing the AJAX call!');
+            }
+        }
+      );
+    }
+  }
+</script>
