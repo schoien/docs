@@ -37,10 +37,10 @@ function getFileinfo($srcFile){
   $cf = false;  
 
   if ($fileType == 'twig' || $fileType == 'comp'){
-    $regexDesk = "/{#DESK(.*?)#}/su";
+    $regexDesk = "/{#DOCS(.*?)#}/su";
     $cf = true;
   }elseif ($fileType == 'php' || $fileType == 'less' || $fileType == 'css' || $fileType == 'js' ){
-    $regexDesk = "/\/\*DESK(.*?)\*\//su";
+    $regexDesk = "/\/\*DOCS(.*?)\*\//su";
     $cf = true;
   }else{
     $descr = 'Denne filtypen blir ikke sjekket for beskrivelse'; 
