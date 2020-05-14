@@ -1,7 +1,13 @@
 <?php
 
-$mainDir = 'sitefolder';
-$grepDir = 'sitefolder';
+$settings_json = file_get_contents("settings.json");
+$settings = json_decode($settings_json, true);
+
+$mainDir = $settings["list_dir"];
+$grepDir = $settings["dependency_search_dir"];
+$desc_pre = $settings["description_prefix"];
+$f_settings = $settings["file_types"];
+
 chdir('../');
 
 require_once 'vendor/autoload.php';
@@ -14,6 +20,7 @@ if (isset($_GET['getinfo'])) {
   
   $content['deskr'] = $fileInfo[0];
   $content['usedin'] = $fileInfo[1];
+  $content['dependencies'] = $fileInfo[2];
   
   $template = $twig->load('macros.twig');
   echo $template->renderBlock('fildetaljer', $content);
@@ -30,33 +37,34 @@ if (isset($_GET['getinfo'])) {
 }
 
 function getFileinfo($srcFile){
-  global $mainDir;
-  global $grepDir;
+  global $mainDir, $grepDir, $f_settings, $desc_pre;
+
   $fileType = end(explode('.', $srcFile));
   $filename = end(explode('/', $srcFile));
-  $cf = false;  
+  $settings = "";
+  if ( array_key_exists( $fileType , $f_settings )){
+    $settings = $f_settings[$fileType];
+  }
+  
+  if ( $settings ){
+    $cs = escapeshellcmd ($settings['comment_start']);
+    $ce = escapeshellcmd ($settings['comment_end']);
+    $regexDesk = "/".$cs.$desc_pre."(.*?)".$ce."/su";
 
-  if ($fileType == 'twig' || $fileType == 'comp'){
-    $regexDesk = "/{#DOCS(.*?)#}/su";
-    $cf = true;
-  }elseif ($fileType == 'php' || $fileType == 'less' || $fileType == 'css' || $fileType == 'js' ){
-    $regexDesk = "/\/\*DOCS(.*?)\*\//su";
-    $cf = true;
-  }else{
-    $descr = 'Denne filtypen blir ikke sjekket for beskrivelse'; 
-  }
-  if($cf){
     $content = file_get_contents($srcFile);
-    preg_match( $regexDesk, $content, $result);
-    $descr = $result[1];
-  }
-  if ($grepDir){
-    exec("grep -r -l " . escapeshellarg($filename) . " ".getcwd() . DIRECTORY_SEPARATOR . $grepDir."/*", $fileList);
+    preg_match( $regexDesk, $content, $descr_serch);
+    $descr = $descr_serch[1];
+    //$descr = $regexDesk;
   }else{
+    $descr = 'Filetype not recognized. Add filetype too docs/settings.json to read content'; 
+  }
+  if ( $grepDir == "" || $grepDir == "./" ){
     exec("grep -r -l " . escapeshellarg($filename) . " ".getcwd() . "/*", $fileList);
+  }else{
+    exec("grep -r -l " . escapeshellarg($filename) . " ".getcwd() . DIRECTORY_SEPARATOR . $grepDir."/*", $fileList);
   }
   $fileList = str_replace(getcwd(), '', $fileList);
-  $fileInfo = array($descr, $fileList);
+  $fileInfo = array($descr, $fileList, $dependency);
   return $fileInfo;
 }
 

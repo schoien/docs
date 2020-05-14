@@ -15,21 +15,21 @@
 {% endmacro %}
 {% block fildetaljer %}
   <div class="fileInfo">
-    <h6>{% if deskr %}{{ deskr }}{% else %}Ingen beskrivele i fil{% endif %}</h6>
-    <h5>Fila refereres i:</h5>
+    <h6>{% if deskr %}{{ deskr }}{% else %}No description found.{% endif %}</h6>
+    <h5>Filename reffered in:</h5>
     <ul class="filelist">
     {% if usedin %}
       {% for file in usedin %}
         <li>{{ file }}</li>
       {% endfor %}
     {% else %}
-      <h6>Ingen filer funnet</h6>
+      <h6>No matches found</h6>
     {% endif %}
     </ul>
-    <h5>Fila inkluderer:</h5>
+    <h5>Dependencies:</h5>
     <ul class="filelist">
-    <h6>Ikke laget sjekk enda</h6>
-    {% for file in needs %}
+    <h6>the best is yet to come.</h6>
+    {% for file in dependencies %}
       <li>{{ file }}</li>
     {% endfor %}
     </ul>

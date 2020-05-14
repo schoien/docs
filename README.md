@@ -1,15 +1,11 @@
 # Docs
-A simple php script that reads file structure an gives file info for easy documentation. 
+A simple php script that reads file structure an gives file info for easy and live documentation. 
 
-## Use:
-Will look for Deskription comments in:  
-php, less, css, js files: /*DOCS *Deskription here* */  
-twig, comp files: {#DOCS *Deskription here* #}  
-open for sugestions on filetypes
-
+## Functions:
+Will look for Deskription comments in files defined in settings.json  
 Will list all files where current file is used.
 
-Function in pipeline:
+### In pipeline:
 List all files used by current file.
 
 ## Dependencies:
@@ -17,7 +13,7 @@ Needs Twig template engine to function.
 Neds to execute grep from PHP.
 
 ## Language:
-Gives som feedback in Norwegian.
+Mainly English
 
 ## Licence:
 This project is distributed under (License will come, preferably open sorce ... ned to learn)
