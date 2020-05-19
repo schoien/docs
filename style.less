@@ -21,7 +21,6 @@
 [class^="icon-"], [class*=" icon-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
   font-family: '@{icomoon-font-family}' !important;
-  speak: none;
   font-style: normal;
   font-weight: normal;
   font-variant: normal;
@@ -180,10 +179,12 @@ p{margin: 0;}
 }
 .filelist{
   display: block;
-  list-style: square inside;
-  margin-bottom: 1em;;
+  list-style: square;
+  margin-bottom: 1em;
+  margin-left: 1.15em;
   li{
-    border:none;
+    border: none;
     padding-left: 0;
   }
+  h6{margin-left: -1em;}
 }

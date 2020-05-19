@@ -1,12 +1,10 @@
 # Docs
-A simple php script that reads file structure an gives file info for easy and live documentation. 
+A simple php script that reads file structure and gives file info for easy and live documentation. 
 
 ## Functions:
 Will look for Deskription comments in files defined in settings.json  
 Will list all files where current file is used.
-
-### In pipeline:
-List all files used by current file.
+Will list files used by current file.
 
 ## Dependencies:
 Needs Twig template engine to function.  

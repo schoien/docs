@@ -1,6 +1,6 @@
 {
-  "list_dir": "./",
-  "dependency_search_dir" : "./",
+  "list_dir": "fagm_struktur/design/",
+  "dependency_search_dir" : "fagm_struktur/design/",
   "description_prefix" : "DOCS",
   "file_types" : { 
     "php" : {

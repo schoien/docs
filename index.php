@@ -49,14 +49,24 @@ function getFileinfo($srcFile){
   if ( $settings ){
     $cs = escapeshellcmd ($settings['comment_start']);
     $ce = escapeshellcmd ($settings['comment_end']);
+    $ie = escapeshellcmd ($settings['includes_end']);
     $regexDesk = "/".$cs.$desc_pre."(.*?)".$ce."/su";
 
     $content = file_get_contents($srcFile);
     preg_match( $regexDesk, $content, $descr_serch);
     $descr = $descr_serch[1];
-    //$descr = $regexDesk;
+    $dependency = array();
+    foreach( $settings['includes'] as $is ){
+      $regexDep = "/".$is."(.*?)".$ie."/";
+      preg_match_all( $regexDep, $content, $dep_serch);
+      if ( is_array($dep_serch[0]) ){
+        array_push($dependency, ...$dep_serch[0]);
+      }else{
+        array_push($dependency, $dep_serch[0]);
+      }
+    }
   }else{
-    $descr = 'Filetype not recognized. Add filetype too docs/settings.json to read content'; 
+    $descr = 'File type not recognized. Add filetype too docs/settings.json to read content';
   }
   if ( $grepDir == "" || $grepDir == "./" ){
     exec("grep -r -l " . escapeshellarg($filename) . " ".getcwd() . "/*", $fileList);
