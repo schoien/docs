@@ -49,7 +49,7 @@ function getFileinfo($srcFile){
   if ( $settings ){
     $cs = escapeshellcmd ($settings['comment_start']);
     $ce = escapeshellcmd ($settings['comment_end']);
-    $ie = escapeshellcmd ($settings['includes_end']);
+    //$ie = escapeshellcmd ($settings['includes_end']);
     $regexDesk = "/".$cs.$desc_pre."(.*?)".$ce."/su";
 
     $content = file_get_contents($srcFile);
@@ -57,7 +57,7 @@ function getFileinfo($srcFile){
     $descr = $descr_serch[1];
     $dependency = array();
     foreach( $settings['includes'] as $is ){
-      $regexDep = "/".$is."(.*?)".$ie."/";
+      $regexDep = "/".$is."(.*?)$/m";
       preg_match_all( $regexDep, $content, $dep_serch);
       if ( is_array($dep_serch[0]) ){
         array_push($dependency, ...$dep_serch[0]);

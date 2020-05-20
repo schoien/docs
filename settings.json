@@ -6,38 +6,32 @@
     "php" : {
       "comment_start": "/*",
       "comment_end": "*/",
-      "includes": [ "include" , "include_once" , "require" , "require_once" , "use" ],
-      "includes_end": ";"
+      "includes": [ "include" , "include_once" , "require" , "require_once" , "use" ]
     },
     "js" : {
       "comment_start": "/*",
       "comment_end": "*/",
-      "includes": [ "import" ],
-      "includes_end": ";"
+      "includes": [ "import" ]
     },
     "css" : {
       "comment_start": "/*",
       "comment_end": "*/",
-      "includes": ["@import"],
-      "includes_end": ";"
+      "includes": ["@import"]
     },
     "less" : {
       "comment_start": "/*",
       "comment_end": "*/",
-      "includes": ["@import"],
-      "includes_end": ";"
+      "includes": ["@import"]
     },
     "twig" : {
       "comment_start": "{#",
       "comment_end": "#}",
-      "includes": ["use" , "extends" , "import" , "include" ],
-      "includes_end": "%}"
+      "includes": ["use" , "extends" , "import" , "include" ]
     },
     "comp" : {
       "comment_start": "{#",
       "comment_end": "#}",
-      "includes": ["use" , "extends" , "import" , "include" ],
-      "includes_end": "%}"
+      "includes": ["use" , "extends" , "import" , "include" ]
     }
   }
 }
