@@ -60,7 +60,7 @@ function getFileinfo($srcFile){
       $regexDep = "/".$is."(.*?)$/m";
       preg_match_all( $regexDep, $content, $dep_serch);
       if ( is_array($dep_serch[0]) ){
-        array_push($dependency, ...$dep_serch[0]);
+        $dependency = array_merge($dependency, $dep_serch[0]);
       }else{
         array_push($dependency, $dep_serch[0]);
       }
